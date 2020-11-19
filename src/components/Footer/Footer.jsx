@@ -7,7 +7,7 @@ export default class Footer extends Component{
             <footer className="footer">
             <div>
                 <div>
-                    <p>Powered by <a className="link" href="https://coinpaprika.com/">coinpaprika.com</a></p>
+                    <p>Powered by <a className="link" href="https://coingecko.com/">coingecko.com</a></p>
                 </div>
                 <hr/>
                 <div>

@@ -14,25 +14,27 @@ export default function CoinList (props) {
         <Table>
         <thead>
         <tr>
+            <th>Rank</th>
             <th>Name</th>
+            <th>Icon</th>
             <th>Ticker</th>
+            <th>Github</th>
             <th>Price</th>
-            {props.showBalance ? <th>Balance</th> : null}
-            <th>Action</th>
+            <th>Market Cap</th>
         </tr>
         </thead>
         <tbody>
         {
-            props.coinData.map( ({key, name, ticker, price, balance}) =>
+            props.coinData.map( ({key, name, ticker, homepage, github, rank, price, icon, marketcap}) =>
             <Coin key={key} 
-                handleRefresh={props.handleRefresh}
-                handleTransaction={props.handleTransaction}
                 name={name} 
-                id = {key} 
-                price={price} 
                 ticker={ticker}
-                showBalance={props.showBalance}
-                balance={balance} 
+                homepage = {homepage} 
+                github={github}
+                price={price} 
+                icon={icon}
+                rank={rank}
+                marketcap={marketcap} 
                 />
             )
         }
