@@ -1,5 +1,6 @@
 import React from "react";
 import { useQuery, gql } from '@apollo/client';
+import Project from '../Project/Project';
 
 const TOPICS = gql`
 {
@@ -34,12 +35,16 @@ export default function Sprojects (props){
     return(
         <>
         <p>Substrate Projects</p>
-        <text>
 
-            {data.search.edges.map((edge) => (
-                edge.node.name + '\n'
-            ))}
-        </text>
+        {
+            data.search.edges.map( (edge) => (
+                <Project
+                name = {edge.node.name}
+                url = {edge.node.url}
+                homepageUrl = {edge.node.homepageUrl} />
+            ))
+        }
+        
         </>
     )
 }

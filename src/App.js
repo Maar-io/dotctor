@@ -4,7 +4,7 @@ import Tab from 'react-bootstrap/Tab'
 import CoinList from './components/CoinList/CoinList';
 import AppHeader from './components/AppHeader/AppHeader';
 import McapChart from './components/McapChart/McapChart';
-import Sprojects from './components/Sprojects/SProjects';
+import Sprojects from './components/Sprojects/Sprojects';
 import Footer from './components/Footer/Footer';
 import styled from 'styled-components';
 import axios from 'axios';
