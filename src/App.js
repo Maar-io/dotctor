@@ -114,7 +114,6 @@ function App(props) {
       <StyledDiv className="App">
                 <AppHeader />
                    <Sprojects/>
-                <Footer/>
               </StyledDiv>
       </Tab>
 

@@ -24,19 +24,22 @@ const TOPICS = gql`
 
 export default function Sprojects (props){
     const { loading, error, data } = useQuery(TOPICS);
-    if (loading) return <p>Loading Github repositories...</p>
-    if (error) return <p>Error while loading Github repositories...</p>
-    
+    if (loading) return <p className="navbar-text navbar-right">Loading Github repositories...</p>
+    if (error) {
+        debugger;
+        console.log(error.message);
+        return <p>{error.message}</p>
+    }
     
     return(
         <>
         <p>Substrate Projects</p>
-        <p>
+        <text>
 
-            {data.search.node.map((node) => (
-                node.name
+            {data.search.edges.map((edge) => (
+                edge.node.name + '\n'
             ))}
-        </p>
+        </text>
         </>
     )
 }
