@@ -13,6 +13,10 @@ const TableData = styled.td`
     
 `;
 
+const TableDataR = styled(TableData)`
+    text-align: right;
+`;
+
 export default function Coin(props) {
 
     return (
@@ -20,10 +24,10 @@ export default function Coin(props) {
             <TableData>{props.rank}</TableData>
             <TableData><a href={props.homepage}>{props.name}</a></TableData>
             <TableData><img src={props.icon} alt="icon"/></TableData>
-            <TableData>{props.ticker}</TableData>
+            <TableData>{props.ticker.toUpperCase()}</TableData>
             <TableData><a href={props.github}>github</a></TableData>
             <TableData>${props.price}</TableData>
-            <TableData>${props.marketcap}</TableData>
+            <TableDataR>${props.marketcap}</TableDataR>
         </tr>
     );
 }

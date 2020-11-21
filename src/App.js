@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react';
+import Tabs from 'react-bootstrap/Tabs'
+import Tab from 'react-bootstrap/Tab'
 import CoinList from './components/CoinList/CoinList';
 import AppHeader from './components/AppHeader/AppHeader';
-import Footer from './components/Footer/Footer'
+import McapChart from './components/McapChart/McapChart';
+import Sprojects from './components/Sprojects/SProjects';
+import Footer from './components/Footer/Footer';
 import styled from 'styled-components';
 import axios from 'axios';
 
@@ -93,12 +97,29 @@ function App(props) {
   });
 
   return (
-    <StyledDiv className="App">
-      <AppHeader />
-      <CoinList 
-        coinData={coinData} />
-      <Footer/>
-    </StyledDiv>
+    <Tabs defaultActiveKey="projects" id="uncontrolled-tabs">
+
+      <Tab eventKey="markets" title="Markets">
+              <StyledDiv className="App">
+                <AppHeader />
+                <CoinList 
+                  coinData={coinData} />
+                <Footer/>
+              </StyledDiv>
+      </Tab>
+      <Tab eventKey="mcap" title="MCap">
+        <McapChart/>  
+      </Tab>
+      <Tab eventKey="projects" title="Projects">
+      <StyledDiv className="App">
+                <AppHeader />
+                   <Sprojects/>
+                <Footer/>
+              </StyledDiv>
+      </Tab>
+
+    </Tabs>
+
   );
 
 
