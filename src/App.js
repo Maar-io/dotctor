@@ -10,8 +10,8 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 //import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootswatch/dist/slate/bootstrap.min.css'
-import '@fortawesome/fontawesome-free/js/all'
+import 'bootswatch/dist/darkly/bootstrap.min.css'
+//import '@fortawesome/fontawesome-free/js/all'
 
 const StyledDiv = styled.div`
 background-color: #282c34;
@@ -99,7 +99,7 @@ function App(props) {
   return (
     <Tabs defaultActiveKey="projects" id="uncontrolled-tabs">
 
-      <Tab eventKey="markets" title="Markets">
+      <Tab eventKey="markets" title="CoinGecko">
               <StyledDiv className="App">
                 <AppHeader />
                 <CoinList 
@@ -111,10 +111,10 @@ function App(props) {
         <McapChart/>  
       </Tab>
       <Tab eventKey="projects" title="Projects">
-      <StyledDiv className="App">
-                <AppHeader />
-                   <Sprojects/>
-              </StyledDiv>
+
+      <div>
+                <Sprojects/>
+      </div>
       </Tab>
 
     </Tabs>
