@@ -1,8 +1,9 @@
 import React from "react";
 import { Card, Button } from 'react-bootstrap';
 
-export default function Project (props) {
+export default function ProjectCards (props) {
 
+    
     return(
         
         <Card border="success" style={{ width: '18rem', margin: 5 }}>
@@ -20,5 +21,6 @@ export default function Project (props) {
                 <small className="text-muted">Last updated 3 mins ago</small>
             </Card.Footer>
         </Card>
+
     )
 }

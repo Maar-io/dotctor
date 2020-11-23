@@ -1,10 +1,14 @@
 import React, {useState, useEffect} from 'react';
-import Tabs from 'react-bootstrap/Tabs'
-import Tab from 'react-bootstrap/Tab'
+//import Tabs from 'react-bootstrap/Tabs'
+//import Tab from 'react-bootstrap/Tab'
+import { gql } from '@apollo/client';
+import { Tabs, Tab, Container, Row, Col, Alert} from 'react-bootstrap';
+
 import CoinList from './components/CoinList/CoinList';
 import AppHeader from './components/AppHeader/AppHeader';
 import McapChart from './components/McapChart/McapChart';
-import Sprojects from './components/Sprojects/Sprojects';
+import GetGithub from './components/GetGithub/GetGithub';
+import ProjectCards from './components/ProjectCards/ProjectCards';
 import Footer from './components/Footer/Footer';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -19,8 +23,34 @@ text-align: center;
 color: seashell;
 `;
 
+const SUBSTRATE = gql`
+{
+    search(query: "is:public topic:substrate topic:blockchain", type: REPOSITORY, first: 100) {
+      repositoryCount
+      pageInfo {
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          ... on Repository {
+            name
+            url
+            homepageUrl
+            description
+          }
+        }
+      }
+    }
+  }
+`;
+
+let projectCards = null;
+
 function App(props) {
   const [coinData, setCoinData] = useState([]);
+  const [githubData, setGithubData] = useState([]);
+
 
   // this is local componentDidMount, not from React statefull component
   /*
@@ -88,9 +118,25 @@ function App(props) {
 
 }
 
+  const handleGithubData = (ghData) => {
+    setGithubData(ghData);
+    projectCards = ghData?
+        <>                {
+          ghData.search.edges.map( (edge) => (
+              <ProjectCards
+              name = {edge.node.name}
+              github = {edge.node.url}
+              description = {edge.node.description}
+              homepageUrl = {edge.node.homepageUrl} />
+          ))}
+        </>
+        : null;
+  }
+
 
 
   useEffect(function() {
+    console.log("useEffect ", )
     if (coinData.length === 0 ) {
       componentDidMount();
     }
@@ -113,8 +159,24 @@ function App(props) {
       <Tab eventKey="projects" title="Projects">
 
       <div>
-                <Sprojects/>
+      <Container fluid='true'>
+            <Row>
+                <Alert variant='info' dismissible='true'>
+                <h4>Add your project!</h4>
+                    <p>
+                    If you want your project to be visible on this site, 
+                    add 'substrate' Github topic to your repository and any other of the following topics: 
+                    'blockchain' 'bla' 'blo'
+                    </p>
+                </Alert>
+            </Row>
+            <Row>
+              <GetGithub query={SUBSTRATE}  handleGithubData={handleGithubData}/>
+              {projectCards}
+              </Row>
+        </Container>
       </div>
+
       </Tab>
 
     </Tabs>
