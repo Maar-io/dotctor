@@ -9,6 +9,8 @@ import {
 import App from './App';
 import { setContext } from '@apollo/client/link/context';
 import { getToken } from './Util';
+import 'bootswatch/dist/darkly/bootstrap.min.css'
+
 
 const httpLink = createHttpLink({
   uri: 'https://api.github.com/graphql',

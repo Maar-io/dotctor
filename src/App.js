@@ -14,7 +14,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 //import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootswatch/dist/darkly/bootstrap.min.css'
+//import 'bootswatch/dist/darkly/bootstrap.min.css'
 //import '@fortawesome/fontawesome-free/js/all'
 
 const StyledDiv = styled.div`
@@ -25,7 +25,7 @@ color: seashell;
 
 const SUBSTRATE = gql`
 {
-    search(query: "is:public topic:substrate topic:blockchain", type: REPOSITORY, first: 100) {
+    search(query: "is:public topic:substrate", type: REPOSITORY, last: 100) {
       repositoryCount
       pageInfo {
         endCursor
@@ -38,6 +38,7 @@ const SUBSTRATE = gql`
             url
             homepageUrl
             description
+            openGraphImageUrl
           }
         }
       }
@@ -45,12 +46,12 @@ const SUBSTRATE = gql`
   }
 `;
 
+let newGhData = null;
 let projectCards = null;
 
 function App(props) {
   const [coinData, setCoinData] = useState([]);
   const [githubData, setGithubData] = useState([]);
-
 
   // this is local componentDidMount, not from React statefull component
   /*
@@ -119,28 +120,32 @@ function App(props) {
 }
 
   const handleGithubData = (ghData) => {
-    setGithubData(ghData);
+    console.log("handleGithubData")
+
     projectCards = ghData?
-        <>                {
-          ghData.search.edges.map( (edge) => (
-              <ProjectCards
-              name = {edge.node.name}
-              github = {edge.node.url}
-              description = {edge.node.description}
-              homepageUrl = {edge.node.homepageUrl} />
-          ))}
-        </>
-        : null;
+      <>                {
+        ghData.search.edges.map( (edge) => (
+            <ProjectCards key = {edge.node.url}
+            name = {edge.node.name}
+            github = {edge.node.url}
+            description = {edge.node.description}
+            ghImage = {edge.node.openGraphImageUrl}
+            homepageUrl = {edge.node.homepageUrl} />
+        ))}
+      </>
+      : null;
+      newGhData = ghData;
   }
 
-
-
   useEffect(function() {
-    console.log("useEffect ", )
+    console.log("useEffect " )
     if (coinData.length === 0 ) {
       componentDidMount();
     }
-  });
+    setGithubData(newGhData);
+    newGhData = null;
+
+  }, []);
 
   return (
     <Tabs defaultActiveKey="projects" id="uncontrolled-tabs">
@@ -172,7 +177,7 @@ function App(props) {
             </Row>
             <Row>
               <GetGithub query={SUBSTRATE}  handleGithubData={handleGithubData}/>
-              {projectCards}
+              { projectCards}
               </Row>
         </Container>
       </div>

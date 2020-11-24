@@ -1,9 +1,10 @@
 import React from "react";
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 
 
-export default function Sprojects (props){
+export default function GetGithub (props){
+    console.log("render GetGithub ")
     const { loading, error, data } = useQuery(props.query);
     if (loading) return <p className="md-3">Loading Github repositories...</p>
     if (error) {
@@ -12,12 +13,9 @@ export default function Sprojects (props){
         return <p>{error.message}</p>
     }
     if (data) {
-        //debugger;
+        console.log("data received GetGithub")
         props.handleGithubData(data);
     }
 
     return(null);
-    /*
-    
-    */
 }
