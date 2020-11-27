@@ -25,7 +25,29 @@ color: seashell;
 
 const SUBSTRATE = gql`
 {
-    search(query: "is:public topic:substrate", type: REPOSITORY, last: 100) {
+    search(query: "is:public topic:substrate topic:blockchain", type: REPOSITORY, first: 10) {
+      repositoryCount
+      pageInfo {
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          ... on Repository {
+            name
+            url
+            homepageUrl
+            description
+            openGraphImageUrl
+          }
+        }
+      }
+    }
+  }
+`;
+const POLKADOT = gql`
+{
+    search(query: "is:public topic:polkadot topic:blockchain", type: REPOSITORY, first: 10) {
       repositoryCount
       pageInfo {
         endCursor
@@ -121,16 +143,15 @@ function App(props) {
 
   const handleGithubData = (ghData) => {
     console.log("handleGithubData")
-
     projectCards = ghData?
       <>                {
-        ghData.search.edges.map( (edge) => (
-            <ProjectCards key = {edge.node.url}
-            name = {edge.node.name}
-            github = {edge.node.url}
-            description = {edge.node.description}
-            ghImage = {edge.node.openGraphImageUrl}
-            homepageUrl = {edge.node.homepageUrl} />
+        ghData.map( (node) => (
+            <ProjectCards key = {node.url}
+            name = {node.name}
+            github = {node.url}
+            description = {node.description}
+            ghImage = {node.openGraphImageUrl}
+            homepageUrl = {node.homepageUrl} />
         ))}
       </>
       : null;
@@ -176,7 +197,7 @@ function App(props) {
                 </Alert>
             </Row>
             <Row>
-              <GetGithub query={SUBSTRATE}  handleGithubData={handleGithubData}/>
+              <GetGithub query1={SUBSTRATE}  query2={POLKADOT} handleGithubData={handleGithubData}/>
               { projectCards}
               </Row>
         </Container>
