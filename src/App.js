@@ -8,7 +8,6 @@ import CoinList from './components/CoinList/CoinList';
 import AppHeader from './components/AppHeader/AppHeader';
 import McapChart from './components/McapChart/McapChart';
 import GetGithub from './components/GetGithub/GetGithub';
-import ProjectCards from './components/ProjectCards/ProjectCards';
 import Footer from './components/Footer/Footer';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -69,11 +68,9 @@ const POLKADOT = gql`
 `;
 
 let newGhData = null;
-let projectCards = null;
 
 function App(props) {
   const [coinData, setCoinData] = useState([]);
-  const [githubData, setGithubData] = useState([]);
 
   // this is local componentDidMount, not from React statefull component
   /*
@@ -141,30 +138,13 @@ function App(props) {
 
 }
 
-  const handleGithubData = (ghData) => {
-    console.log("handleGithubData")
-    projectCards = ghData?
-      <>                {
-        ghData.map( (node) => (
-            <ProjectCards key = {node.url}
-            name = {node.name}
-            github = {node.url}
-            description = {node.description}
-            ghImage = {node.openGraphImageUrl}
-            homepageUrl = {node.homepageUrl} />
-        ))}
-      </>
-      : null;
-      newGhData = ghData;
-  }
+  
 
   useEffect(function() {
     console.log("useEffect " )
     if (coinData.length === 0 ) {
       componentDidMount();
     }
-    setGithubData(newGhData);
-    newGhData = null;
 
   }, []);
 
@@ -197,8 +177,7 @@ function App(props) {
                 </Alert>
             </Row>
             <Row>
-              <GetGithub query1={SUBSTRATE}  query2={POLKADOT} handleGithubData={handleGithubData}/>
-              { projectCards}
+              <GetGithub query1={SUBSTRATE}  query2={POLKADOT}/>
               </Row>
         </Container>
       </div>
