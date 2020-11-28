@@ -1,4 +1,6 @@
 import React from "react";
+import { Container, Row, Alert } from 'react-bootstrap';
+
 import { useQuery } from '@apollo/client';
 import { resultKeyNameFromField } from "@apollo/client/utilities";
 import ProjectCards from '../ProjectCards/ProjectCards';
@@ -36,34 +38,29 @@ export default function GetGithub (props){
         console.log("Total combined results =", result.length)
     }
 
-    function handleGithubData(ghData) {
-        console.log("handleGithubData", ghData.length)
-        let projectCards = ghData?
-          <>                {
-            ghData.map( (node) => (
-                <ProjectCards key = {node.url}
-                name = {node.name}
-                github = {node.url}
-                description = {node.description}
-                ghImage = {node.openGraphImageUrl}
-                homepageUrl = {node.homepageUrl} />
-            ))}
-          </>
-          : null;
-          return {projectCards}
-      }
+    return(  
+        <React.Fragment>
 
-    return(
-            <>
-            {result? result.map( (node) => (
-                <ProjectCards key = {node.url}
-                name = {node.name}
-                github = {node.url}
-                description = {node.description}
-                ghImage = {node.openGraphImageUrl}
-                homepageUrl = {node.homepageUrl} />
-            ))
-            : null}
-          </>
+            <Alert variant='info' dismissible='true'>
+                    <h4>Add your project!</h4>
+                        <p>
+                        If you want your project to be visible on this site, add 'substrate' or 'polkadot' 
+                        Github topic to your repository and any other of the following topics: 'blockchain' 'wallet' 'tools'
+                        </p>
+            </Alert>
+            <Container fluid='true'>
+                <Row>
+                {result? result.map( (node) => (
+                    <ProjectCards key = {node.url}
+                    name = {node.name}
+                    github = {node.url}
+                    description = {node.description}
+                    ghImage = {node.openGraphImageUrl}
+                    homepageUrl = {node.homepageUrl} />
+                    ))
+                    : null}
+                </Row>
+            </Container>
+        </React.Fragment>
     );
 }
