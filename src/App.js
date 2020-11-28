@@ -3,13 +3,9 @@ import { gql } from '@apollo/client';
 import { Container, Row, Navbar, Nav } from 'react-bootstrap';
 
 import CoinList from './components/CoinList/CoinList';
-import AppHeader from './components/AppHeader/AppHeader';
-import McapChart from './components/McapChart/McapChart';
 import GetGithub from './components/GetGithub/GetGithub';
 import { Home } from './components/Home/Home';
-import { About } from './components/About/About';
 import { NBar } from './components/NBar';
-import Footer from './components/Footer/Footer';
 import styled from 'styled-components';
 import axios from 'axios';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
