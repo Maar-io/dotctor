@@ -4,7 +4,7 @@ import { Container, Row, Navbar, Nav } from 'react-bootstrap';
 
 import CoinList from './components/CoinList/CoinList';
 import GetGithub from './components/GetGithub/GetGithub';
-import { Home } from './components/Home/Home';
+import Home from './components/Home/Home';
 import { NBar } from './components/NBar';
 import styled from 'styled-components';
 import axios from 'axios';
