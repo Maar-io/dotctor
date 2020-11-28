@@ -108,6 +108,7 @@ function App(props) {
       <Router>
         <NBar />
         <Switch>
+          <Route path={process.env.PUBLIC_URL + '/'}/>
           <Route exact path="/" component={Home} />
           <Route path="/gecko" render={(props) => <CoinList {...props} coinData={coinData} />} />
           <Route path="/github" render={(props) => <GetGithub {...props} query1={SUBSTRATE} query2={POLKADOT} />} />
