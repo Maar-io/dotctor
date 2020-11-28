@@ -16,29 +16,29 @@ const Styles = styled.div`
 `;
 
 export const NBar = () => (
-  <Styles>
-    <Navbar expand="lg">
-      <Navbar.Brand href="/">Dotctor</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/">Home</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/about">About</Link>
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link>
-              <Link to="/github">Github</Link>
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
-  </Styles >
+    <Styles>
+        <Navbar expand="lg">
+            <Navbar.Brand href="/">DotEco</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="ml-auto">
+                    <Nav.Item>
+                        <Nav.Link>
+                            <Link to="/">Home</Link>
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link>
+                            <Link to="/github">Projects</Link>
+                        </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link>
+                            <Link to="/gecko">coinGecko</Link>
+                        </Nav.Link>
+                    </Nav.Item>
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
+    </Styles >
 )
