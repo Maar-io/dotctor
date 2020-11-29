@@ -8,7 +8,6 @@ import {
 } from '@apollo/client';
 import App from './App';
 import { setContext } from '@apollo/client/link/context';
-import { getToken } from './Util';
 import 'bootswatch/dist/darkly/bootstrap.min.css'
 
 
@@ -18,8 +17,7 @@ const httpLink = createHttpLink({
 
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists
-  const token = getToken();
-  console.log(token);
+  const token = process.env.REACT_APP_MY_TOKEN;
   // return the headers to the context so httpLink can read them
   return {
     headers: {

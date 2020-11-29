@@ -5,6 +5,7 @@ import { Container, Row, Navbar, Nav } from 'react-bootstrap';
 import CoinList from './components/CoinList/CoinList';
 import GetGithub from './components/GetGithub/GetGithub';
 import Home from './components/Home/Home';
+import Login from './components/Login/Login';
 import { NBar } from './components/NBar';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -105,6 +106,12 @@ function App(props) {
 
   return (
     <React.Fragment>
+       <div>
+      <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
+      <form>
+        <input type="hidden" defaultValue={process.env.REACT_APP_NOT_SECRET_CODE} />
+      </form>
+    </div>
       <Router>
         <NBar />
         <Switch>
@@ -112,6 +119,7 @@ function App(props) {
           <Route exact path="/" component={Home} />
           <Route path="/gecko" render={(props) => <CoinList {...props} coinData={coinData} />} />
           <Route path="/github" render={(props) => <GetGithub {...props} query1={SUBSTRATE} query2={POLKADOT} />} />
+          <Route path="/login" component={Login} />
         </Switch>
       </Router>
     </React.Fragment>
