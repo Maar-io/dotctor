@@ -1,8 +1,16 @@
 import React, { Component } from 'react'
 import firebase from 'firebase'
 import 'firebase/auth'
+import {
+    ApolloClient,
+    ApolloProvider,
+    createHttpLink,
+    InMemoryCache
+} from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
+import GetGithub from '../GetGithub/GetGithub';
 
 firebase.initializeApp({
     apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -16,11 +24,18 @@ firebase.initializeApp({
 })
 
 class Login extends Component {
-    state = {
-        isSignedIn: false,
-        authToken: null,
-        userName: null,
-    }
+    constructor(props) {
+        super(props);
+        this.state = {
+            isSignedIn: false,
+            authToken: null,
+            userName: null,
+            apolloClient: null,
+        }
+        console.log("construct Login")
+
+      }        
+
     uiConfig = {
         signInFlow: "popup",
         signInOptions: [
@@ -28,10 +43,35 @@ class Login extends Component {
         ],
         callbacks: {
             signInSuccessWithAuthResult: result => {
+                console.log("signInSuccessWithAuthResult")
+
+                const httpLink = createHttpLink({
+                    uri: 'https://api.github.com/graphql',
+                });
+
+                const authLink = setContext((_, { headers }) => {
+                    // get the authentication token from local storage if it exists
+                    const token = result.credential.accessToken;
+                    // return the headers to the context so httpLink can read them
+                    return {
+                        headers: {
+                            ...headers,
+                            authorization: token ? `Bearer ${token}` : "",
+                        }
+                    }
+                });
+
+                const client = new ApolloClient({
+                    cache: new InMemoryCache(),
+                    link: authLink.concat(httpLink)
+                });
+
                 this.setState({
                     authToken: result.credential.accessToken,
-                    userName: result.user.displayName
+                    userName: result.user.displayName,
+                    apolloClient: client,
                 });
+
             }
         }
     }
@@ -41,27 +81,40 @@ class Login extends Component {
             this.setState({ isSignedIn: !!user })
             console.log("user", user)
             console.log(firebase.auth().currentUser)
-            console.log("token", firebase.auth().currentUser.getIdToken)
+            //console.log("token", firebase.auth().currentUser.getIdToken)
         });
         if (!this.state.authToken) {
             firebase.auth().signOut();
         }
     }
 
+    componentWillUnmount() {
+        // Can't perform a React state update on an unmounted component
+        this.setState = (state,callback)=>{
+            return;
+        };
+    }
+
     render() {
+        console.log("render Login")
+
         return (
+
             <div>
                 <h1>Welcome </h1>
                 {this.state.isSignedIn ? (
-                    <span>
-                        <div>Signed In!</div>
-                        <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
-                        <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
-                        <img
-                            alt="profile picture"
-                            src={firebase.auth().currentUser.photoURL}
-                        />
-                    </span>
+                    <ApolloProvider client={this.state.apolloClient}>
+                        <span>
+                            <div>Signed In!</div>
+                            <button onClick={() => firebase.auth().signOut()}>Sign out!</button>
+                            <h1>Welcome {firebase.auth().currentUser.displayName}</h1>
+                            <img
+                                alt="user"
+                                src={firebase.auth().currentUser.photoURL}
+                            />
+                            <GetGithub query1={this.props.query1} query2={this.props.query2} />
+                        </span>
+                    </ApolloProvider>
                 ) : (
                         <StyledFirebaseAuth
                             uiConfig={this.uiConfig}
@@ -69,6 +122,7 @@ class Login extends Component {
                         />
                     )}
             </div>
+
         )
     }
 }

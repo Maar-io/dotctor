@@ -1,3 +1,4 @@
+// @flow
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Nav, Navbar } from 'react-bootstrap';
@@ -14,6 +15,8 @@ const Styles = styled.div`
     }
   }
 `;
+
+//<button className="btn btn-info log">Log In</button>
 
 export const NBar = () => (
     <Styles>
@@ -39,7 +42,7 @@ export const NBar = () => (
                     </Nav.Item>
                     <Nav.Item>
                         <Nav.Link>
-                            <Link to="/login">Login</Link>
+                            <Link to="/login">login</Link>
                         </Nav.Link>
                     </Nav.Item>
                 </Nav>
@@ -47,3 +50,4 @@ export const NBar = () => (
         </Navbar>
     </Styles >
 )
+

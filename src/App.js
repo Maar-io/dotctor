@@ -1,3 +1,4 @@
+// @flow
 import React, { useState, useEffect } from 'react';
 import { gql } from '@apollo/client';
 import { Container, Row, Navbar, Nav } from 'react-bootstrap';
@@ -95,7 +96,8 @@ function App(props) {
 
   }
 
-
+  console.log("render APP")
+  debugger;
 
   useEffect(function () {
     if (coinData.length === 0) {
@@ -115,11 +117,11 @@ function App(props) {
       <Router>
         <NBar />
         <Switch>
-          <Route path={process.env.PUBLIC_URL + '/'}/>
+          <Route path={process.env.REACT_APP_PUBLIC_URL}/>
           <Route exact path="/" component={Home} />
           <Route path="/gecko" render={(props) => <CoinList {...props} coinData={coinData} />} />
           <Route path="/github" render={(props) => <GetGithub {...props} query1={SUBSTRATE} query2={POLKADOT} />} />
-          <Route path="/login" component={Login} />
+          <Route path="/login" render={(props) => <Login {...props} query1={SUBSTRATE} query2={POLKADOT} />} />
         </Switch>
       </Router>
     </React.Fragment>

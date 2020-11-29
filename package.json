@@ -1,5 +1,5 @@
 {
-  "name": "doteco",
+  "name": "dotctor",
   "version": "0.1.0",
   "private": true,
   "homepage": "https://maar-io.github.io/dotctor",
@@ -32,6 +32,7 @@
     "deploy": "gh-pages -d build",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "flow": "flow",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

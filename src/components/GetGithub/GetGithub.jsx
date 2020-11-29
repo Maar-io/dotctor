@@ -1,10 +1,9 @@
+// @flow
 import React from "react";
 import { Container, Row, Alert } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/client';
-import { resultKeyNameFromField } from "@apollo/client/utilities";
 import ProjectCards from '../ProjectCards/ProjectCards';
-import Login from '../Login/Login'
 
 
 export default function GetGithub(props) {
@@ -40,7 +39,6 @@ export default function GetGithub(props) {
 
     return (
         <React.Fragment>
-            <Login/>
             <Alert variant='info' dismissible='true'>
                 <h4>Add your project!</h4>
                 <p>

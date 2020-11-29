@@ -3,7 +3,7 @@ import { Card, Button } from 'react-bootstrap';
 
 export default function ProjectCards (props) {
 
-    
+    console.log("render Projects " + props.name)
     return(
         
         <Card border="success" style={{ width: '18rem', margin: 5 }}>
