@@ -31,17 +31,15 @@ export default function Login() {
   return (
 
     <div>
-      <h1>Welcome </h1>
       {error && <Alert variant="danger">{error}</Alert>}
       {auth.currentUser ? (
           <span>
-            <div>Signed In!</div>
-            <button disabled={loading} onClick={() => logout()}>Log out!</button>
             <h1>Welcome {auth.currentUser.displayName}</h1>
             <img
               alt="user"
               src={auth.currentUser.photoURL}
             />
+            <button disabled={loading} onClick={() => logout()}>Log out!</button>
           </span>
       ) : (
           <StyledFirebaseAuth

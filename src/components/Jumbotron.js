@@ -8,7 +8,7 @@ const Styles = styled.div`
   .jumbo {
     background-size: cover;
     color: #efefef;
-    height: 800px;
+    height: 400px;
     position: relative;
     z-index: -2;
   }
@@ -31,7 +31,8 @@ export const Jumbotron = () => (
             <div className="overlay"></div>
             <Container>
                 <h1>Polkadot Ecosystem Explorer</h1>
-                <Button className="btn btn-primary btn-lg">Search Github</Button>
+                <h5>Explore Github projects related to Polkadot</h5>
+                <h5>you must be logged in Github to use this app.</h5>
             </Container>
         </Jumbo>
     </Styles>

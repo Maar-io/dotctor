@@ -1,25 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import {
   ApolloClient,
   createHttpLink,
   InMemoryCache
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+} from '@apollo/client'
+import { setContext } from '@apollo/client/link/context'
 
-import GetGithub from './components/GetGithub';
-import Home from './components/Home';
+import GetGithub from './components/GetGithub'
+import Home from './components/Home'
 import { AuthProvider } from "./components/AuthContext"
-import Login from './components/Login';
+import Login from './components/Login'
+import NBar from './components/NBar'
 import PrivateRoute from './components/PrivateRoute'
 
-import styled from 'styled-components';
+import styled from 'styled-components'
 
 function App(props) {
   console.log("render APP")
-  const [isSignedIn, setSignedIn] = useState(false);
-  const [apolloClient, setApolloClient] = useState({});
+  const [isSignedIn, setSignedIn] = useState(false)
+  const [apolloClient, setApolloClient] = useState({})
 
   function tokenReceived(token) {
     setSignedIn(true);
@@ -53,6 +54,7 @@ function App(props) {
         <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
       </div>
       <Router>
+        <NBar/>
         <AuthProvider>
           <Switch>
             <Route exact path="/" component={Home} />
