@@ -40,11 +40,6 @@ export const NBar = () => (
                             <Link to="/gecko">coinGecko</Link>
                         </Nav.Link>
                     </Nav.Item>
-                    <Nav.Item>
-                        <Nav.Link>
-                            <Link to="/login">login</Link>
-                        </Nav.Link>
-                    </Nav.Item>
                 </Nav>
             </Navbar.Collapse>
         </Navbar>

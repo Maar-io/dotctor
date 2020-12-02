@@ -1,7 +1,7 @@
 import React from 'react'
-import Coin from '../Coin/Coin';
+import Coin from './Coin';
 import styled from 'styled-components';
-import Footer from '../Footer/Footer';
+import Footer from './Footer';
 
 
 const Table = styled.table`

@@ -2,15 +2,61 @@
 import React from "react";
 import { Container, Row, Alert } from 'react-bootstrap';
 
-import { useQuery } from '@apollo/client';
-import ProjectCards from '../ProjectCards/ProjectCards';
+import { useQuery, gql } from '@apollo/client';
+import ProjectCards from './ProjectCards';
+
+
+const SUBSTRATE = gql`
+{
+    search(query: "is:public topic:substrate topic:blockchain", type: REPOSITORY, first: 100) {
+      repositoryCount
+      pageInfo {
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          ... on Repository {
+            name
+            url
+            homepageUrl
+            description
+            openGraphImageUrl
+          }
+        }
+      }
+    }
+  }
+`;
+const POLKADOT = gql`
+{
+    search(query: "is:public topic:polkadot topic:blockchain", type: REPOSITORY, first: 100) {
+      repositoryCount
+      pageInfo {
+        endCursor
+        startCursor
+      }
+      edges {
+        node {
+          ... on Repository {
+            name
+            url
+            homepageUrl
+            description
+            openGraphImageUrl
+          }
+        }
+      }
+    }
+  }
+`;
 
 
 export default function GetGithub(props) {
     console.log("render GetGithub ");
     let result = [];
-    const { loading: loading1, error: error1, data: data1 } = useQuery(props.query1);
-    const { loading: loading2, error: error2, data: data2 } = useQuery(props.query2);
+    const { loading: loading1, error: error1, data: data1 } = useQuery(SUBSTRATE);
+    const { loading: loading2, error: error2, data: data2 } = useQuery(POLKADOT);
 
     if (loading1 || loading2) return <p className="md-3">Loading Github repositories...</p>
     if (error1 || error2) {
