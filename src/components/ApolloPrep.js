@@ -1,24 +1,25 @@
 import React, { useState, useEffect } from 'react'
-
-import {
+import { ApolloProvider } from '@apollo/client'
+/* import {
     ApolloClient,
     ApolloProvider,
     createHttpLink,
     InMemoryCache
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-
+ */
 import GetGithub from './GetGithub'
 import { useAuth } from "./AuthContext"
 
-export default function ApolloPrep() {
+export default function ApolloPrep(prep) {
 
     console.log("render ApolloPrep")
-    const [apolloClient, setApolloClient] = useState({})
-    const [token, setToken] = useState(0)
-    const { getAuthToken } = useAuth()
+    //const [apolloClient, setApolloClient] = useState({})
+    //const [token, setToken] = useState(0)
+    //const { getAuthToken } = useAuth()
+    const { getApolloClient } = useAuth()
 
-    const setupApollo = () => {
+/*     const setupApollo = () => {
         console.log("setupApollo")
 
         const httpLink = createHttpLink({
@@ -43,15 +44,15 @@ export default function ApolloPrep() {
         });
         setApolloClient(client)
     }
-
-    setupApollo()
+ */
     useEffect(() => {
         console.log("ApolloPrep useEffect")
     }, [])
 
-    console.log("Apollo client =", apolloClient, ", token ", getAuthToken())
+    console.log("Apollo client =", getApolloClient())
 
-    return (<ApolloProvider client={apolloClient}>
+    return (
+    <ApolloProvider client={getApolloClient()}>
         <GetGithub />
     </ApolloProvider>
     )

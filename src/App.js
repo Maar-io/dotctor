@@ -27,7 +27,7 @@ function App(props) {
         <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/login" render={(props) => <Login {...props} saveToken={saveToken()} />} />
+              <Route path="/login" component={Login} />
               <PrivateRoute path="/github" component={ApolloPrep} />
             </Switch>
         </AuthProvider>

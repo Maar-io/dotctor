@@ -14,6 +14,7 @@ export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState({})
   const [loading, setLoading] = useState(true)
   const [token, saveToken] = useState(0)
+  const [apolloClient, setClient] = useState(0)
 
   function login() {
     //return auth.GithubAuthProvider.PROVIDER_ID
@@ -34,6 +35,16 @@ export function AuthProvider({ children }) {
     saveToken(userToken)
   }
 
+  function getApolloClient() {
+    console.log("Authcontext get apolloClient ", apolloClient)
+    return(apolloClient)
+  }
+
+  function saveApolloClient(newClient) {
+    console.log("Authcontext saveApolloClient ", newClient)
+    setClient(newClient)
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       console.log("user", user)
@@ -49,7 +60,9 @@ export function AuthProvider({ children }) {
     login,
     logout,
     getAuthToken,
-    setToken
+    setToken,
+    saveApolloClient,
+    getApolloClient
   }
 
   return (

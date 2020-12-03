@@ -64,7 +64,9 @@ export default function GetGithub() {
   }
   if (error1 || error2) {
     debugger;
+    console.log(error1);
     console.log(error1.message);
+    console.log(error2);
     console.log(error2.message);
     return <p>{error1.message}</p>
   }
