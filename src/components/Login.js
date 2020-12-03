@@ -6,9 +6,9 @@ import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import { Alert } from 'react-bootstrap';
 
 
-export default function Login() {
+export default function Login(props) {
   console.log("render Login")
-  const { login, logout } = useAuth()
+  const { login, logout, setToken } = useAuth()
   const [error, setError] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
@@ -23,11 +23,12 @@ export default function Login() {
         console.log("signInSuccessWithAuthResult")
         history.push("/")
         setLoading(false)
-        console.log("token ", result.credential.accessToken)
+        console.log("Login result ", result)
+        console.log("Login token ", result.credential.accessToken)
+        setToken(result.credential.accessToken)
       }
     }
   }
-  debugger;
   return (
 
     <div>

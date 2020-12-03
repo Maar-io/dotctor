@@ -11,8 +11,9 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
-  const [currentUser, setCurrentUser] = useState()
+  const [currentUser, setCurrentUser] = useState({})
   const [loading, setLoading] = useState(true)
+  const [token, saveToken] = useState(0)
 
   function login() {
     //return auth.GithubAuthProvider.PROVIDER_ID
@@ -23,10 +24,21 @@ export function AuthProvider({ children }) {
     return auth.signOut()
   }
 
+  function getAuthToken() {
+    console.log("Authcontext get token ")
+    return currentUser? token : 0
+  }
+  
+  function setToken(userToken) {
+    console.log("Authcontext saving token ", userToken)
+    saveToken(userToken)
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       console.log("user", user)
       setCurrentUser(user)
+      console.log("AuthContext useEffect token", token)
       setLoading(false)
     })
     return unsubscribe
@@ -36,6 +48,8 @@ export function AuthProvider({ children }) {
     currentUser,
     login,
     logout,
+    getAuthToken,
+    setToken
   }
 
   return (
