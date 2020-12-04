@@ -14,14 +14,15 @@ function App(props) {
   return (
 
     <React.Fragment>
-      <div>
+      {/* <div>
         <small>You are running this application in <b>{process.env.NODE_ENV}</b> mode.</small>
-      </div>
+      </div> */}
       <Router>
         <NBar />
         <AuthProvider>
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route path="/home" component={Home} />
               <Route path="/login" component={Login} />
               <PrivateRoute path="/github" component={ApolloPrep} />
             </Switch>

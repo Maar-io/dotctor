@@ -31,8 +31,7 @@ export const Jumbotron = () => (
             <div className="overlay"></div>
             <Container>
                 <h1>Polkadot Ecosystem Explorer</h1>
-                <h5>Explore Github projects related to Polkadot</h5>
-                <h5>you must be logged in Github to use this app.</h5>
+                <h6>Explore Github projects related to Polkadot</h6>
             </Container>
         </Jumbo>
     </Styles>

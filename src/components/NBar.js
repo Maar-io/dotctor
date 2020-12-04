@@ -22,8 +22,8 @@ const Styles = styled.div`
 export default function NBar() {
     return (
         <Styles>
-            <Navbar expand="lg">
-                <Navbar.Brand href="/">.ctor</Navbar.Brand>
+            <Navbar bg="dark" expand="lg">
+                <Navbar.Brand href="/">Dotctor</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
