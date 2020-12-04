@@ -20,6 +20,9 @@ const SUBSTRATE = gql`
             name
             url
             homepageUrl
+            stargazers {
+              totalCount
+            }
             description
             openGraphImageUrl
           }
@@ -42,6 +45,9 @@ const POLKADOT = gql`
             name
             url
             homepageUrl
+            stargazers {
+              totalCount
+            }
             description
             openGraphImageUrl
           }
@@ -97,7 +103,7 @@ export default function GetGithub() {
           Github topic to your repository and any other of the following topics: 'blockchain' 'wallet' 'tools'
                         </p>
       </Alert>
-      <Container fluid='true'>
+      <Container fluid='true' className="pl-5">
         <Row>
           {result ? result.map((node) => (
             <ProjectCards key={node.url}
@@ -105,6 +111,7 @@ export default function GetGithub() {
               github={node.url}
               description={node.description}
               ghImage={node.openGraphImageUrl}
+              stars={node.stargazers.totalCount} 
               homepageUrl={node.homepageUrl} />
           ))
             : null}

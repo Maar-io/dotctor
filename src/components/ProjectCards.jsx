@@ -18,7 +18,7 @@ export default function ProjectCards (props) {
             </Card.Text>
             </Card.Body>
             <Card.Footer>
-                <small className="text-muted">Last updated 3 mins ago</small>
+              <small className="text-muted">&#x2b52; {props.stars}</small>
             </Card.Footer>
         </Card>
 

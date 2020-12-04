@@ -15,6 +15,9 @@ const Styles = styled.div`
       color: pink;
     }
   }
+  .navbar-toggle {
+    background: magenta !important;
+}
 `;
 
 //<button className="btn btn-info log">Log In</button>
@@ -24,7 +27,7 @@ export default function NBar() {
         <Styles>
             <Navbar bg="dark" expand="lg">
                 <Navbar.Brand href="/">Dotctor</Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                <Navbar.Toggle  />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
                         <NavItem>
