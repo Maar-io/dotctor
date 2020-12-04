@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Nav, Navbar } from 'react-bootstrap';
+import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const Styles = styled.div`
@@ -9,9 +9,10 @@ const Styles = styled.div`
     background-color: #222;
   }
   a, .navbar-brand, .navbar-nav .nav-link {
+    padding: 15px;
     color: #bbb;
     &:hover {
-      color: white;
+      color: pink;
     }
   }
 `;
@@ -22,20 +23,16 @@ export default function NBar() {
     return (
         <Styles>
             <Navbar expand="lg">
-                <Navbar.Brand href="/">Dotctor</Navbar.Brand>
+                <Navbar.Brand href="/">.ctor</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        <Nav.Item>
-                            <Nav.Link>
-                                <Link to="/">Home</Link>
-                            </Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                            <Nav.Link>
-                                <Link to="/github">Projects</Link>
-                            </Nav.Link>
-                        </Nav.Item>
+                        <NavItem>
+                            <Link to="/">Home</Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/github">Projects</Link>
+                        </NavItem>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
