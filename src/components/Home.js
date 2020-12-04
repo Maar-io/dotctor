@@ -1,5 +1,4 @@
 import React from "react";
-import { Alert } from 'react-bootstrap';
 import { Jumbotron } from './Jumbotron';
 import Login from './Login'
 

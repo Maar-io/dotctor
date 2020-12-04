@@ -10,8 +10,8 @@ import { setContext } from '@apollo/client/link/context'
 
 export default function Login(props) {
   console.log("render Login")
-  const { login, logout, setToken, saveApolloClient, getAuthToken } = useAuth()
-  const [error, setError] = useState("")
+  const { login, logout, setToken, saveApolloClient } = useAuth()
+  const [error] = useState("")
   const [loading, setLoading] = useState(false)
   const history = useHistory()
 

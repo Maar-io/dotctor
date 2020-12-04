@@ -10,11 +10,6 @@ import ApolloPrep from './components/ApolloPrep'
 
 function App(props) {
   console.log("render APP")
-  
-  const saveToken = (token) => {
-    props.saveToken(token)
-    console.log("App token ", token)
-  }
 
   return (
 
