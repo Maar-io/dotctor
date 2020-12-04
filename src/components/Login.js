@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import { useAuth } from "./AuthContext"
-import { useHistory } from "react-router-dom"
+import { useHistory, Link } from "react-router-dom"
 import { auth } from './Firebase'
 import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
-import { Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 
@@ -58,19 +58,24 @@ export default function Login(props) {
     saveApolloClient(client)
   }
 
+  /* <h1>Welcome {auth.currentUser.displayName}</h1>
+  <img
+    alt="user"
+    src={auth.currentUser.photoURL}
+  /> */
   return (
 
     <div>
       {error && <Alert variant="danger">{error}</Alert>}
       {auth.currentUser ? (
-        <span>
-          <h1>Welcome {auth.currentUser.displayName}</h1>
-          <img
-            alt="user"
-            src={auth.currentUser.photoURL}
-          />
-          <button disabled={loading} onClick={() => logout()}>Log out!</button>
-        </span>
+        <div class="container">
+        <div class="row">
+          <div class="col text-center">
+            <Button className="btn btn-secondary lg" disabled={loading} onClick={() => logout()}>{auth.currentUser.displayName},  Log out</Button>
+          </div>
+        </div>
+      </div>
+
       ) : (
           <StyledFirebaseAuth
             uiConfig={uiConfig}
