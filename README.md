@@ -1,8 +1,11 @@
 # This project is deployed here: [Dotctor](https://dotctor-66a97.web.app/).
 
 :white_check_mark: ReactJs with react-bootstrap
-:white_check_mark: GrapgQl with Apollo client
-:white_check_mark: Firebase Authentication with Github as OAuth identity provider.
+
+:white_check_mark: GraphQl with Apollo client
+
+:white_check_mark: Firebase Authentication with Github as OAuth identity provider
+
 :white_check_mark: Hosted by Firebase
 
 # Homepage
