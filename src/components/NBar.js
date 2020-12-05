@@ -12,7 +12,7 @@ const Styles = styled.div`
     padding: 15px;
     color: #bbb;
     &:hover {
-      color: pink;
+      color: rgb(230, 0, 122);
     }
   }
   .navbar-toggle {
@@ -23,7 +23,7 @@ const Styles = styled.div`
 export default function NBar() {
     return (
         <Styles>
-            <Navbar bg="dark" expand="lg">
+            <Navbar className="navbar-dark" expand="lg">
                 <Navbar.Brand href="/">Dotctor</Navbar.Brand>
                 <Navbar.Toggle  />
                 <Navbar.Collapse id="basic-navbar-nav">

@@ -5,7 +5,7 @@ export default function ProjectCards (props) {
 
     return(
         
-        <Card border="success" key={props.name} style={{ width: '18rem', margin: 5 }}>
+        <Card border="info" key={props.name} style={{ width: '18rem', margin: 5 }}>
             <Card.Img variant="top" src={props.ghImage} alt="project image"/>
             <Card.Body>
             <Card.Title> {props.name} </Card.Title>

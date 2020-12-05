@@ -96,7 +96,7 @@ export default function GetGithub() {
 
   return (
     <React.Fragment>
-      <Alert variant='info' dismissible='true'>
+      <Alert variant='info'>
         <h4>Add your project!</h4>
         <p>
           If you want your project to be visible on this site, add 'substrate' or 'polkadot'
