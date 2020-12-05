@@ -1,9 +1,9 @@
 # This project is deployed here: [Dotctor](https://dotctor-66a97.web.app/).
 
-&#2705; ReactJs with react-bootstrap
-&#2705; GrapgQl with Apollo client
-&#2705; Firebase Authentication with Github as OAuth identity provider.
-&#2705; Hosted by Firebase
+:white_check_mark: ReactJs with react-bootstrap
+:white_check_mark: GrapgQl with Apollo client
+:white_check_mark: Firebase Authentication with Github as OAuth identity provider.
+:white_check_mark: Hosted by Firebase
 
 # Homepage
 
@@ -11,4 +11,4 @@
 
 # Search results
 
-![Screenshot github](./dotctor2.png)
+![Screenshot github](./dotctor1.png)
