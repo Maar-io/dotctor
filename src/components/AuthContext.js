@@ -13,8 +13,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState({})
   const [loading, setLoading] = useState(true)
-  const [token, saveToken] = useState(0)
-  const [apolloClient, setClient] = useState(0)
 
   function login() {
     //return auth.GithubAuthProvider.PROVIDER_ID
@@ -24,26 +22,6 @@ export function AuthProvider({ children }) {
   function logout() {
     setCurrentUser({})
     return auth.signOut()
-  }
-
-  function getAuthToken() {
-    console.log("Authcontext get token ")
-    return currentUser? token : 0
-  }
-  
-  function setToken(userToken) {
-    console.log("Authcontext saving token ", userToken)
-    saveToken(userToken)
-  }
-
-  function getApolloClient() {
-    console.log("Authcontext get apolloClient ", apolloClient)
-    return(apolloClient)
-  }
-
-  function saveApolloClient(newClient) {
-    console.log("Authcontext saveApolloClient ", newClient)
-    setClient(newClient)
   }
 
   useEffect(() => {
@@ -58,11 +36,7 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     login,
-    logout,
-    getAuthToken,
-    setToken,
-    saveApolloClient,
-    getApolloClient
+    logout
   }
 
   return (
