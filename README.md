@@ -1,6 +1,4 @@
-# Getting Started with Create React App
-
-This project is deployed here: [Dotctor](https://dotctor-66a97.web.app/).
+# This project is deployed here: [Dotctor](https://dotctor-66a97.web.app/).
 
 &#2705; ReactJs with react-bootstrap
 &#2705; GrapgQl with Apollo client
@@ -9,7 +7,7 @@ This project is deployed here: [Dotctor](https://dotctor-66a97.web.app/).
 
 # Homepage
 
-![Screenshot home](./dotctor1.png)
+![Screenshot home](./dotctor2.png)
 
 # Search results
 
