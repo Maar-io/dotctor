@@ -20,8 +20,6 @@ const Styles = styled.div`
 }
 `;
 
-//<button className="btn btn-info log">Log In</button>
-
 export default function NBar() {
     return (
         <Styles>
