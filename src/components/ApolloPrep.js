@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import GetGithub from './GetGithub'
+import Search from './Search'
 //import { useAuth } from "./AuthContext"
 import { ApolloClient, createHttpLink, InMemoryCache, ApolloProvider } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
@@ -46,7 +46,7 @@ export default function ApolloPrep() {
         console.log("Apollo client =", client)
         return (
             <ApolloProvider client={client}>
-                <GetGithub />
+                <Search />
             </ApolloProvider>
         )
     }

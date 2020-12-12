@@ -2,97 +2,44 @@
 import React from "react";
 import { Container, Row, Alert } from 'react-bootstrap';
 
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import ProjectCards from './ProjectCards';
 
 
-const SUBSTRATE = gql`
-{
-    search(query: "is:public topic:substrate topic:blockchain", type: REPOSITORY, first: 100) {
-      repositoryCount
-      pageInfo {
-        endCursor
-        startCursor
-      }
-      edges {
-        node {
-          ... on Repository {
-            name
-            url
-            homepageUrl
-            stargazers {
-              totalCount
-            }
-            description
-            openGraphImageUrl
-          }
-        }
-      }
-    }
-  }
-`;
-const POLKADOT = gql`
-{
-    search(query: "is:public topic:polkadot topic:blockchain", type: REPOSITORY, first: 100) {
-      repositoryCount
-      pageInfo {
-        endCursor
-        startCursor
-      }
-      edges {
-        node {
-          ... on Repository {
-            name
-            url
-            homepageUrl
-            stargazers {
-              totalCount
-            }
-            description
-            openGraphImageUrl
-          }
-        }
-      }
-    }
-  }
-`;
 
 
-export default function GetGithub() {
+
+export default function GetGithub(props) {
   console.log("render GetGithub ");
   let result = [];
-  const { loading: loading1, error: error1, data: data1 } = useQuery(SUBSTRATE);
-  const { loading: loading2, error: error2, data: data2 } = useQuery(POLKADOT);
+  const { loading: loading, error: error, data: data } = useQuery(props.query);
 
-  if (loading1 || loading2) {
+  if (loading) {
     console.log("loading...");
     return <p className="md-3">Loading Github repositories...</p>
   }
-  if (error1 || error2) {
+  if (error) {
     debugger;
-    console.log(error1);
-    console.log(error1.message);
-    console.log(error2);
-    console.log(error2.message);
-    return <p>{error1.message}</p>
+    console.log(error);
+    console.log(error.message);
+    return <p>{error.message}</p>
   }
-  if (data1 && data2) {
-    console.log("data received GetGithub")
-    let arr1 = data1.search.edges;
-    let arr2 = data2.search.edges;
-    console.log("query1 fetched =", arr1.length)
-    console.log("query2 fetched =", arr2.length)
+  if (data) {
+    let arr = data.search.edges;
+    console.log("query fetched =", arr.length)
+    console.log(data)
 
-    var merged = arr1.concat(arr2.filter((item) => arr1.indexOf(item) < 0))
-    let nodeNames = [];
-    for (const obj in merged) {
-      if (!nodeNames.includes(merged[obj].node.name)) {
-        nodeNames.push(merged[obj].node.name);
-        result.push(merged[obj].node);
-      }
-    }
-    console.log("Total combined results =", result.length)
+    // var merged = arr.concat(arr2.filter((item) => arr.indexOf(item) < 0))
+    // let nodeNames = [];
+    // for (const obj in merged) {
+    //   if (!nodeNames.includes(merged[obj].node.name)) {
+    //     nodeNames.push(merged[obj].node.name);
+    //     result.push(merged[obj].node);
+    //   }
+    // }
+    // console.log("Total combined results =", result.length)
   }
+  // stars={node.stargazers.totalCount} 
 
   return (
     <React.Fragment>
@@ -105,14 +52,13 @@ export default function GetGithub() {
       </Alert>
       <Container fluid='true' className="pl-5">
         <Row>
-          {result ? result.map((node) => (
-            <ProjectCards key={node.url}
-              name={node.name}
-              github={node.url}
-              description={node.description}
-              ghImage={node.openGraphImageUrl}
-              stars={node.stargazers.totalCount} 
-              homepageUrl={node.homepageUrl} />
+          {data ? data.search.edges.map((edge) => (
+            <ProjectCards key={edge.node.url}
+            name={edge.node.name}
+            github={edge.node.url}
+            description={edge.node.description}
+            ghImage={edge.node.openGraphImageUrl}
+            homepageUrl={edge.node.homepageUrl} />
           ))
             : null}
         </Row>
