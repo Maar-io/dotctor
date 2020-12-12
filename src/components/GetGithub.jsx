@@ -11,8 +11,8 @@ import ProjectCards from './ProjectCards';
 
 export default function GetGithub(props) {
   console.log("render GetGithub ");
-  let result = [];
-  const { loading: loading, error: error, data: data } = useQuery(props.query);
+  let repos = 0;
+  const { loading, error, data } = useQuery(props.query);
 
   if (loading) {
     console.log("loading...");
@@ -25,9 +25,8 @@ export default function GetGithub(props) {
     return <p>{error.message}</p>
   }
   if (data) {
-    let arr = data.search.edges;
-    console.log("query fetched =", arr.length)
-    console.log(data)
+    repos = data.search.edges.length;
+    console.log("query fetched =", repos)
 
     // var merged = arr.concat(arr2.filter((item) => arr.indexOf(item) < 0))
     // let nodeNames = [];
@@ -39,16 +38,15 @@ export default function GetGithub(props) {
     // }
     // console.log("Total combined results =", result.length)
   }
-  // stars={node.stargazers.totalCount} 
-
+  
   return (
     <React.Fragment>
       <Alert variant='info'>
         <h4>Add your project!</h4>
         <p>
-          If you want your project to be visible on this site, add 'substrate' or 'polkadot'
-          Github topic to your repository and any other of the following topics: 'blockchain' 'wallet' 'tools'
-                        </p>
+          If you want your project to be visible on this site, add any combination of the above
+          Github topics to your repository. Fetched {repos} repositories.
+        </p>
       </Alert>
       <Container fluid='true' className="pl-5">
         <Row>
@@ -58,6 +56,7 @@ export default function GetGithub(props) {
             github={edge.node.url}
             description={edge.node.description}
             ghImage={edge.node.openGraphImageUrl}
+            stars={edge.node.stargazers.totalCount} 
             homepageUrl={edge.node.homepageUrl} />
           ))
             : null}

@@ -1,62 +1,108 @@
-import React from 'react'
-import GetGithub from './GetGithub'
-import { gql } from '@apollo/client';
+import React, { useState }from 'react'
+import Query from './Query'
+import { Form, Row, Col} from 'react-bootstrap'
 
-const SUBSTRATE = gql`
-{
-    search(query: "is:public topic:substrate topic:blockchain", type: REPOSITORY, first: 100) {
-      repositoryCount
-      pageInfo {
-        endCursor
-        startCursor
-      }
-      edges {
-        node {
-          ... on Repository {
-            name
-            url
-            homepageUrl
-            stargazers {
-              totalCount
-            }
-            description
-            openGraphImageUrl
-          }
-        }
-      }
-    }
-  }
-`;
-const POLKADOT = gql`
-{
-    search(query: "is:public topic:polkadot topic:blockchain", type: REPOSITORY, first: 100) {
-      repositoryCount
-      pageInfo {
-        endCursor
-        startCursor
-      }
-      edges {
-        node {
-          ... on Repository {
-            name
-            url
-            homepageUrl
-            stargazers {
-              totalCount
-            }
-            description
-            openGraphImageUrl
-          }
-        }
-      }
-    }
-  }
-`;
 
 export default function Search(props) {
+    const[network, setNetwork] = useState('polkadot')
+    const[utility, setUtility] = useState('blockchain')
+    
+    const onUtilityChange = (e) => {
+        setUtility(e.target.value)
+        console.log("util ", utility)
+      }
+
+    const onNetworkChange = (e) => {
+        setNetwork(e.target.value)
+        console.log("net ", network)
+      }
+
+    console.log("search", network, utility)
     return (
-        <div>
-            <GetGithub query={SUBSTRATE}/>
-        </div>
+        <>
+        <Form>
+            <Form.Group as={Row}>
+            <Col sm={2}>
+                <Form.Check
+                type="radio"
+                label="polkadot"
+                name="network"
+                value="polkadot"
+                checked={network === 'polkadot'}
+                onChange={onNetworkChange}
+                />
+                <Form.Check
+                type="radio"
+                label="kusama"
+                name="network"
+                value="kusama"
+                checked={network === 'kusama'}
+                onChange={onNetworkChange}
+                />
+                <Form.Check
+                type="radio"
+                label="substrate"
+                name="network"
+                value="substrate"
+                checked={network === 'substrate'}
+                onChange={onNetworkChange}
+                />
+            </Col>
+            <Col sm={10}>
+                <Form.Check
+                type="radio"
+                label="blockchain"
+                name="formHorizontalRadios"
+                value="blockchain"
+                checked={utility === 'blockchain'}
+                onChange={onUtilityChange}               
+                />
+                <Form.Check
+                type="radio"
+                label="wallet"
+                name="formHorizontalRadios"
+                value="wallet"
+                checked={utility === 'wallet'}
+                onChange={onUtilityChange}                
+                />
+                <Form.Check
+                type="radio"
+                label="defi"
+                name="formHorizontalRadios"
+                value="defi"
+                checked={utility === 'defi'}
+                onChange={onUtilityChange}                
+                />
+                <Form.Check
+                type="radio"
+                label="cryptocurrency"
+                name="formHorizontalRadios"
+                value="cryptocurrency"
+                checked={utility === 'cryptocurrency'}
+                onChange={onUtilityChange}                
+                />
+                <Form.Check
+                type="radio"
+                label="ethereum"
+                name="formHorizontalRadios"
+                value="ethereum"
+                checked={utility === 'ethereum'}
+                onChange={onUtilityChange}                
+                />
+                <Form.Check
+                type="radio"
+                label="none"
+                name="formHorizontalRadios"
+                value=""
+                checked={utility === ''}
+                onChange={onUtilityChange}                
+                />
+            </Col>
+            </Form.Group>
+    </Form>
+    <div>
+        <Query network={network} utility={utility}/>
+    </div>
+    </>
     )
 }
