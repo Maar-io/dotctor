@@ -32,7 +32,10 @@ export default function NBar() {
                             <Link to="/">Home</Link>
                         </NavItem>
                         <NavItem>
-                            <Link to="/github">Projects</Link>
+                            <Link to="/github">Search</Link>
+                        </NavItem>
+                        <NavItem>
+                            <Link to="/add">Add</Link>
                         </NavItem>
                     </Nav>
                 </Navbar.Collapse>

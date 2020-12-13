@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { Container, Row, Alert } from 'react-bootstrap';
+import { Container, Row, Badge } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/client';
 import ProjectCards from './ProjectCards';
@@ -41,13 +41,9 @@ export default function GetGithub(props) {
   
   return (
     <React.Fragment>
-      <Alert variant='info'>
-        <h4>Add your project!</h4>
-        <p>
-          If you want your project to be visible on this site, add any combination of the above
-          Github topics to your repository. Fetched {repos} repositories.
+        <p className="ml-4">
+        Found <Badge variant="danger">{repos} </Badge>repositories.
         </p>
-      </Alert>
       <Container fluid='true' className="pl-5">
         <Row>
           {data ? data.search.edges.map((edge) => (

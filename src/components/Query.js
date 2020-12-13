@@ -36,12 +36,8 @@ export default function Query(props) {
 
     console.log("query", props.network, props.utility)
     return (
-        {props.mini?
-            <div>
+        <div>
             <GetGithub query={QUERY} />
-            </div>
-            : null
-        }
-        
+        </div>
     )
 }
