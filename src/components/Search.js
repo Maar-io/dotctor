@@ -18,104 +18,11 @@ export default function Search(props) {
     }
 
     console.log("search", network, utility)
-    // return (
-    //     <>
-    //     <Form>
-    //         <Form.Group as={Row} className="justify-content-md-center">
-    //         <Col md={3} xs={6}>
-    //             <Form.Check
-    //             type="radio"
-    //             label="polkadot"
-    //             name="network"
-    //             value="polkadot"
-    //             checked={network === 'polkadot'}
-    //             onChange={onNetworkChange}
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="kusama"
-    //             name="network"
-    //             value="kusama"
-    //             checked={network === 'kusama'}
-    //             onChange={onNetworkChange}
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="substrate"
-    //             name="network"
-    //             value="substrate"
-    //             checked={network === 'substrate'}
-    //             onChange={onNetworkChange}
-    //             />
-    //         </Col>
-    //         <Col md={3} xs={6}>
-    //             <Form.Check
-    //             type="radio"
-    //             label="blockchain"
-    //             name="formHorizontalRadios"
-    //             value="blockchain"
-    //             checked={utility === 'blockchain'}
-    //             onChange={onUtilityChange}               
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="wallet"
-    //             name="formHorizontalRadios"
-    //             value="wallet"
-    //             checked={utility === 'wallet'}
-    //             onChange={onUtilityChange}                
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="defi"
-    //             name="formHorizontalRadios"
-    //             value="defi"
-    //             checked={utility === 'defi'}
-    //             onChange={onUtilityChange}                
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="cryptocurrency"
-    //             name="formHorizontalRadios"
-    //             value="cryptocurrency"
-    //             checked={utility === 'cryptocurrency'}
-    //             onChange={onUtilityChange}                
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="ethereum"
-    //             name="formHorizontalRadios"
-    //             value="ethereum"
-    //             checked={utility === 'ethereum'}
-    //             onChange={onUtilityChange}                
-    //             />
-    //             <Form.Check
-    //             type="radio"
-    //             label="none"
-    //             name="formHorizontalRadios"
-    //             value=""
-    //             checked={utility === ''}
-    //             onChange={onUtilityChange}                
-    //             />
-    //         </Col>
-    //         <Col>
-    //             <Form.Check 
-    //                 type="switch"
-    //                 id="custom-switch"
-    //                 label="mini view"
-    //                 />
-    //         </Col>
-    //         </Form.Group>
-    // </Form>
-    // <div>
-    //     <Query network={network} utility={utility} mini={true}/>
-    // </div>
-    // </>
-    // )
+
     return (
         <>
             <Form>
-                <Form.Group as={Row} className="ml-1 justify-content-md-center">
+                <Form.Group as={Row} className="ml-1 mt-1 justify-content-md-center">
 
                     <ToggleButtonGroup type="radio" name="networkRadios" value={network} onChange={onNetworkChange}>
                         <ToggleButton variant="info"
@@ -153,19 +60,40 @@ export default function Search(props) {
                             checked={utility === 'cryptocurrency'}
                             onClick={onUtilityChange}>cryptocurrency</ToggleButton>
                         <ToggleButton variant="secondary"
+                            value='bridge'
+                            checked={utility === 'bridge'}
+                            onClick={onUtilityChange}>bridge</ToggleButton>
+
+                    </ToggleButtonGroup>
+                </Form.Group>
+                <Form.Group as={Row} className="ml-1 justify-content-md-center">
+
+                    <ToggleButtonGroup type="radio" name="utilRadios" value={utility} onChange={onUtilityChange} size="sm">
+                        <ToggleButton variant="secondary"
+                            value='parachain'
+                            checked={utility === 'parachain'}
+                            onClick={onUtilityChange}>parachain</ToggleButton>
+                        <ToggleButton variant="secondary"
                             value='ethereum'
                             checked={utility === 'ethereum'}
                             onClick={onUtilityChange}>ethereum</ToggleButton>
                         <ToggleButton variant="secondary"
+                            value='explorer'
+                            checked={utility === 'explorer'}
+                            onClick={onUtilityChange}>explorer</ToggleButton>
+                        <ToggleButton variant="secondary"
                             value=''
                             checked={utility === ''}
-                            onClick={onUtilityChange}>-</ToggleButton>
+                            onClick={onUtilityChange}>none</ToggleButton>
                     </ToggleButtonGroup>
                 </Form.Group>
             </Form>
-            <div>
+                <hr style={{
+                    color: '#333',                    
+                    height: .5,
+                    borderColor : '#000000'
+                }} />
                 <Query network={network} utility={utility} mini={true} />
-            </div>
         </>
     )
 }

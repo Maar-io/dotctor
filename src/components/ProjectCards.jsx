@@ -17,13 +17,13 @@ export default function ProjectCards (props) {
 
                 <ButtonGroup className="mr-2" aria-label="First group">
                 {props.homepageUrl? <Button variant="info" size="sm" href={props.homepageUrl}>Home</Button> :
-                                <Button size="sm"  disabled>Home</Button>}
+                                <Button variant="info" size="sm"  disabled>Home</Button>}
                 </ButtonGroup>
                 <ButtonGroup className="mr-2" aria-label="Second group">
                 {props.github? <Button variant="dark" size="sm" href={props.github}>Github</Button> :
                             <Button size="sm" disabled>Github</Button>}                
                 </ButtonGroup>
-                <Button variant="success" size="sm" className="mr-2" disabled>&#x2b52; {props.stars}</Button>
+                <Button variant="primary" size="sm" className="mr-2 btn-outline-light" disabled>&#x2b52; {props.stars}</Button>
 
             </ButtonToolbar>
 

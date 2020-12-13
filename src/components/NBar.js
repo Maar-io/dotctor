@@ -6,10 +6,10 @@ import styled from 'styled-components';
 
 const Styles = styled.div`
   .navbar {
-    background-color: #222;
+    background-color: rgb(102, 0, 102);
   }
   a, .navbar-brand, .navbar-nav .nav-link {
-    padding: 15px;
+    padding: 5px;
     color: #bbb;
     &:hover {
       color: rgb(230, 0, 122);

@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { Container, Row, Badge } from 'react-bootstrap';
+import { Container, Row, Badge, Spinner } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/client';
 import ProjectCards from './ProjectCards';
@@ -16,7 +16,8 @@ export default function GetGithub(props) {
 
   if (loading) {
     console.log("loading...");
-    return <p className="md-3">Loading Github repositories...</p>
+    // return <p className="md-3">Loading Github repositories...</p>
+    return (<Spinner animation="grow" variant="info" />)
   }
   if (error) {
     debugger;
@@ -27,18 +28,7 @@ export default function GetGithub(props) {
   if (data) {
     repos = data.search.edges.length;
     console.log("query fetched =", repos)
-
-    // var merged = arr.concat(arr2.filter((item) => arr.indexOf(item) < 0))
-    // let nodeNames = [];
-    // for (const obj in merged) {
-    //   if (!nodeNames.includes(merged[obj].node.name)) {
-    //     nodeNames.push(merged[obj].node.name);
-    //     result.push(merged[obj].node);
-    //   }
-    // }
-    // console.log("Total combined results =", result.length)
   }
-  
   return (
     <React.Fragment>
         <p className="ml-4">
