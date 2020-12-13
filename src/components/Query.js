@@ -4,10 +4,13 @@ import GetGithub from './GetGithub'
 
 
 export default function Query(props) {
-
+    let util = ''
+    if (props.utility !== ''){
+        util = 'topic:' + props.utility
+    }
     const QUERY = gql`
     {
-        search(query: "is:public topic:${props.network} topic:${props.utility}", type: REPOSITORY, first: 100) {
+        search(query: "is:public topic:${props.network} ${util}", type: REPOSITORY, first: 100) {
         repositoryCount
         pageInfo {
             endCursor
@@ -31,7 +34,7 @@ export default function Query(props) {
     }
     `;
 
-
+    console.log("query", props.network, props.utility)
     return (
         <div>
             <GetGithub query={QUERY} />
