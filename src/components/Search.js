@@ -22,7 +22,7 @@ export default function Search(props) {
         <>
         <Form>
             <Form.Group as={Row}>
-            <Col sm={2}>
+            <Col xs={2}>
                 <Form.Check
                 type="radio"
                 label="polkadot"
@@ -48,7 +48,7 @@ export default function Search(props) {
                 onChange={onNetworkChange}
                 />
             </Col>
-            <Col sm={10}>
+            <Col xs={10}>
                 <Form.Check
                 type="radio"
                 label="blockchain"
