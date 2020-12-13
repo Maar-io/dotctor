@@ -21,8 +21,8 @@ export default function Search(props) {
     return (
         <>
         <Form>
-            <Form.Group as={Row}>
-            <Col xs={2}>
+            <Form.Group as={Row} className="justify-content-md-center">
+            <Col md={3} xs={6}>
                 <Form.Check
                 type="radio"
                 label="polkadot"
@@ -48,7 +48,7 @@ export default function Search(props) {
                 onChange={onNetworkChange}
                 />
             </Col>
-            <Col xs={10}>
+            <Col md={3} xs={6}>
                 <Form.Check
                 type="radio"
                 label="blockchain"
@@ -98,10 +98,17 @@ export default function Search(props) {
                 onChange={onUtilityChange}                
                 />
             </Col>
+            <Col>
+                <Form.Check 
+                    type="switch"
+                    id="custom-switch"
+                    label="mini view"
+                    />
+            </Col>
             </Form.Group>
     </Form>
     <div>
-        <Query network={network} utility={utility}/>
+        <Query network={network} utility={utility} mini={true}/>
     </div>
     </>
     )
