@@ -2,12 +2,17 @@ import React from 'react'
 import { gql } from '@apollo/client';
 import GetGithub from './GetGithub'
 
+const SINCE_DAYS_AGO = 90 // count new commits since this many days ago
 
 export default function Query(props) {
     let util = ''
     if (props.utility !== ''){
         util = 'topic:' + props.utility
     }
+
+    var fromDate = new Date(new Date().setDate(new Date().getDate() - SINCE_DAYS_AGO)) // get 
+    var date = fromDate.getFullYear() + '-' + (fromDate.getMonth() + 1) + '-' + fromDate.getDate() + "T00:00:00Z"
+
     const QUERY = gql`
     {
         search(query: "is:public topic:${props.network} ${util}", type: REPOSITORY, first: 100) {
@@ -15,6 +20,7 @@ export default function Query(props) {
         pageInfo {
             endCursor
             startCursor
+            hasNextPage
         }
         edges {
             node {
@@ -27,9 +33,17 @@ export default function Query(props) {
                 }
                 description
                 openGraphImageUrl
+                object(expression: "master") {
+                  ... on Commit {
+                    history(since: "${date}") {
+                      totalCount
+
+                    }
+                  }
+                }
+              }
             }
-            }
-        }
+          }
         }
     }
     `;
@@ -37,7 +51,7 @@ export default function Query(props) {
     console.log("query", props.network, props.utility)
     return (
         <div>
-            <GetGithub query={QUERY} />
+            <GetGithub daysAgo={SINCE_DAYS_AGO} query={QUERY} />
         </div>
     )
 }
