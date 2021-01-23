@@ -12,12 +12,12 @@ export default function ProjectCards(props) {
         <Card.Title> {props.name} </Card.Title>
         <Card.Text>  {props.description} </Card.Text>
       </Card.Body>
-      
+
       <Card.Footer>
         <ButtonToolbar aria-label="Toolbar with button groups">
           <ButtonGroup className="mr-2" aria-label="First group">
-            {props.homepageUrl ? <Button variant="info" size="sm" href={props.homepageUrl}>Home</Button> :
-              <Button variant="info" size="sm" disabled>Home</Button>}
+            {props.homepageUrl ? <Button variant="info" size="sm" href={props.homepageUrl}>	&#127962;</Button> :
+              null}
           </ButtonGroup>
           <ButtonGroup className="mr-2" aria-label="Second group">
             {props.github ? <Button variant="dark" size="sm" href={props.github}>Github</Button> :

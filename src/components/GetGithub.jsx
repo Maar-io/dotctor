@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { Container, Row, Badge, Spinner, Button } from 'react-bootstrap';
+import { Container, Row, Spinner, Button } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/client';
 import ProjectCards from './ProjectCards';
