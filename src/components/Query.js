@@ -51,7 +51,7 @@ export default function Query(props) {
     console.log("query", props.network, props.utility)
     return (
         <div>
-            <GetGithub daysAgo={SINCE_DAYS_AGO} query={QUERY} />
+            <GetGithub daysAgo={SINCE_DAYS_AGO} query={QUERY} mini={props.mini} sort={props.sort}/>
         </div>
     )
 }

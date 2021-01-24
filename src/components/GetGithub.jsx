@@ -29,27 +29,40 @@ export default function GetGithub(props) {
   if (data) {
     repos = data.search.edges.length;
     console.log("query fetched =", repos)
-    //console.log(data.search.edges)
-    //console.log("totalCount", data.search.edges[0].node.object.history.totalCount)
+
   }
   return (
     <React.Fragment>
       <Button variant="success" size="sm" className="mr-2 btn-outline-light" disabled>&#8682; commits in last {props.daysAgo} days</Button>
         Found {repos} repositories
       <Container fluid='true' className="pl-5">
-        <Row>
-          {data ? data.search.edges.map((edge) => (
-            <ProjectCards key={edge.node.url}
-              name={edge.node.name}
-              github={edge.node.url}
-              description={edge.node.description}
-              ghImage={edge.node.openGraphImageUrl}
-              stars={edge.node.stargazers.totalCount}
-              homepageUrl={edge.node.homepageUrl}
-              commitsObject={edge.node.object} />
-          ))
-            : null}
-        </Row>
+        {props.mini === true ?
+          <Row>
+            {data ? data.search.edges.map((edge) => (
+              <ProjectList key={edge.node.url}
+                name={edge.node.name}
+                github={edge.node.url}
+                stars={edge.node.stargazers.totalCount}
+                ghImage={edge.node.openGraphImageUrl}
+                homepageUrl={edge.node.homepageUrl}
+                commitsObject={edge.node.object} />
+            ))
+              : null}
+          </Row> :
+          <Row>
+            {data ? data.search.edges.map((edge) => (
+              <ProjectCards key={edge.node.url}
+                name={edge.node.name}
+                github={edge.node.url}
+                description={edge.node.description}
+                ghImage={edge.node.openGraphImageUrl}
+                stars={edge.node.stargazers.totalCount}
+                homepageUrl={edge.node.homepageUrl}
+                commitsObject={edge.node.object} />
+            ))
+              : null}
+          </Row>
+        }
       </Container>
     </React.Fragment>
   );
