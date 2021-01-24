@@ -26,11 +26,26 @@ export default function GetGithub(props) {
     console.log(error.message);
     return <p>{error.message}</p>
   }
-  if (data) {
-    repos = data.search.edges.length;
-    console.log("query fetched =", repos)
+  
+    function compare(a, b) {
+      if (a.node.object === null || b.node.object === null) return 0
+      const repoA = a.node.object.history.totalCount;
+      const repoB = b.node.object.history.totalCount;
+      if (repoA > repoB) return -1
+      if (repoA < repoB) return 1
+      return 0
+    }
 
+  let nodes = null
+  if (data !== null) {
+    repos = data.search.edges.length;
+    console.log("repos fetched = ", repos)
+    nodes = data.search.edges
+    if(props.sort){
+      nodes = nodes.slice().sort(compare)
+    }
   }
+
   return (
     <React.Fragment>
       <Button variant="success" size="sm" className="mr-2 btn-outline-light" disabled>&#8682; commits in last {props.daysAgo} days</Button>
@@ -38,7 +53,7 @@ export default function GetGithub(props) {
       <Container fluid='true' className="pl-5">
         {props.mini === true ?
           <Row>
-            {data ? data.search.edges.map((edge) => (
+            {data !== null ? nodes.map((edge) => (
               <ProjectList key={edge.node.url}
                 name={edge.node.name}
                 github={edge.node.url}
@@ -50,7 +65,7 @@ export default function GetGithub(props) {
               : null}
           </Row> :
           <Row>
-            {data ? data.search.edges.map((edge) => (
+            {data !== null ? nodes.map((edge) => (
               <ProjectCards key={edge.node.url}
                 name={edge.node.name}
                 github={edge.node.url}
