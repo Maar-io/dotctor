@@ -4,6 +4,7 @@ import { Container, Row, Spinner, Button } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/client';
 import ProjectCards from './ProjectCards';
+import ProjectList from './ProjectList';
 
 
 
