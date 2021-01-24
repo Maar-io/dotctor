@@ -1,6 +1,6 @@
 // @flow
 import React from "react";
-import { Container, Row, Spinner, Button } from 'react-bootstrap';
+import { Container, Row, Spinner, Button, Badge } from 'react-bootstrap';
 
 import { useQuery } from '@apollo/client';
 import ProjectCards from './ProjectCards';
@@ -26,22 +26,22 @@ export default function GetGithub(props) {
     console.log(error.message);
     return <p>{error.message}</p>
   }
-  
-    function compare(a, b) {
-      if (a.node.object === null || b.node.object === null) return 0
-      const repoA = a.node.object.history.totalCount;
-      const repoB = b.node.object.history.totalCount;
-      if (repoA > repoB) return -1
-      if (repoA < repoB) return 1
-      return 0
-    }
+
+  function compare(a, b) {
+    if (a.node.object === null || b.node.object === null) return 0
+    const repoA = a.node.object.history.totalCount;
+    const repoB = b.node.object.history.totalCount;
+    if (repoA > repoB) return -1
+    if (repoA < repoB) return 1
+    return 0
+  }
 
   let nodes = null
   if (data !== null) {
     repos = data.search.edges.length;
     console.log("repos fetched = ", repos)
     nodes = data.search.edges
-    if(props.sort){
+    if (props.sort) {
       nodes = nodes.slice().sort(compare)
     }
   }
@@ -49,36 +49,41 @@ export default function GetGithub(props) {
   return (
     <React.Fragment>
       <Button variant="success" size="sm" className="mr-2 btn-outline-light" disabled>&#8682; commits in last {props.daysAgo} days</Button>
-        Found {repos} repositories
+        Found <Badge variant="danger">{repos} </Badge> repositories
+      <hr style={{
+        color: '#333',
+        height: .5,
+        borderColor: '#000000'
+      }} />
       <Container fluid='true' className="pl-5">
-        {props.mini === true ?
-          <Row>
-            {data !== null ? nodes.map((edge) => (
-              <ProjectList key={edge.node.url}
-                name={edge.node.name}
-                github={edge.node.url}
-                stars={edge.node.stargazers.totalCount}
-                ghImage={edge.node.openGraphImageUrl}
-                homepageUrl={edge.node.homepageUrl}
-                commitsObject={edge.node.object} />
-            ))
-              : null}
-          </Row> :
-          <Row>
-            {data !== null ? nodes.map((edge) => (
-              <ProjectCards key={edge.node.url}
-                name={edge.node.name}
-                github={edge.node.url}
-                description={edge.node.description}
-                ghImage={edge.node.openGraphImageUrl}
-                stars={edge.node.stargazers.totalCount}
-                homepageUrl={edge.node.homepageUrl}
-                commitsObject={edge.node.object} />
-            ))
-              : null}
-          </Row>
-        }
+      {props.large === true ?
+        <Row>
+          {data !== null ? nodes.map((edge) => (
+            <ProjectCards key={edge.node.url}
+              name={edge.node.name}
+              github={edge.node.url}
+              description={edge.node.description}
+              ghImage={edge.node.openGraphImageUrl}
+              stars={edge.node.stargazers.totalCount}
+              homepageUrl={edge.node.homepageUrl}
+              commitsObject={edge.node.object} />
+          ))
+            : null}
+        </Row> :
+        <Row>
+          {data !== null ? nodes.map((edge) => (
+            <ProjectList key={edge.node.url}
+              name={edge.node.name}
+              github={edge.node.url}
+              stars={edge.node.stargazers.totalCount}
+              ghImage={edge.node.openGraphImageUrl}
+              homepageUrl={edge.node.homepageUrl}
+              commitsObject={edge.node.object} />
+          ))
+            : null}
+        </Row>
+      }
       </Container>
-    </React.Fragment>
+    </React.Fragment >
   );
 }

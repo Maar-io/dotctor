@@ -6,7 +6,7 @@ import { Form, Row, ToggleButtonGroup, ToggleButton } from 'react-bootstrap'
 export default function Search(props) {
   const [network, setNetwork] = useState('polkadot')
   const [utility, setUtility] = useState('blockchain')
-  const [mini, setMini] = useState(false)
+  const [large, setLarge] = useState(false)
   const [sort, setSort] = useState(false)
 
   const onUtilityChange = (val) => {
@@ -19,8 +19,8 @@ export default function Search(props) {
     console.log("new value for net =", val)
   }
 
-  const miniEnabled = () => {
-    setMini(oldValue => !oldValue)
+  const largeEnabled = () => {
+    setLarge(oldValue => !oldValue)
   }
 
   const sortCommit = () => {
@@ -102,16 +102,16 @@ export default function Search(props) {
           </ToggleButtonGroup>
         </Form.Group>
         <Form.Group as={Row} className="ml-1 justify-content-md-center">
-          <Form.Check
+          <Form.Check className="mr-3"
             type="switch"
-            id="mini"
-            label="Mini "
-            onChange={miniEnabled}
+            id="large"
+            label="large "
+            onChange={largeEnabled}
           />
           <Form.Check
             type="switch"
             id="sort"
-            label="Sort star/commit"
+            label="Sort by commit"
             onChange={sortCommit}
           />
         </Form.Group>
@@ -121,7 +121,7 @@ export default function Search(props) {
         height: .5,
         borderColor: '#000000'
       }} />
-      <Query network={network} utility={utility} mini={mini} sort={sort}/>
+      <Query network={network} utility={utility} large={large} sort={sort}/>
     </>
   )
 }

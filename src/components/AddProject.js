@@ -10,8 +10,8 @@ export default class AddProject extends Component {
                 <Alert variant='info' size="large">
                     <h4>Add your project!</h4>
                     <p>
-                        If you want your project to be visible on this site, add to your repository
-          any combination of Github topics you see in the search form.
+                        If you want your project to be visible on this site, add to your repository's description
+          any combination of tags you see in the search form (on Github tags called topics). Below is the example of description with topics.
                 </p>
                 </Alert>
                 <div className="container">
