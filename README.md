@@ -12,6 +12,11 @@
 
 ![Screenshot home](./dotctor2.png)
 
-# Search results
+
+# Search results list
+
+![Screenshot github mini](./mini.png)
+
+# Search results cards
 
 ![Screenshot github](./dotctor1.png)
