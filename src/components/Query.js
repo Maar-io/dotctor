@@ -11,7 +11,10 @@ export default function Query(props) {
     }
 
     var fromDate = new Date(new Date().setDate(new Date().getDate() - SINCE_DAYS_AGO)) // get 
-    var date = fromDate.getFullYear() + '-' + (fromDate.getMonth() + 1) + '-' + fromDate.getDate() + "T00:00:00Z"
+    var date = fromDate.getFullYear() + '-'
+        + ('0' + (fromDate.getMonth())).slice(-2) + '-'
+        + ( '0' + fromDate.getDate()).slice(-2)
+        + "T00:00:00Z"
 
     const QUERY = gql`
     {
